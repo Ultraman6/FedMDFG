@@ -141,9 +141,9 @@ class FedMDFG(fp.Algorithm):
         if self.last_client_id_list is not None:
             add_idx = []
             for idx, last_client_id in enumerate(self.last_client_id_list):
-                if last_client_id not in client_id_list:
+                if last_client_id not in client_id_list:  # 统计当前轮次缺席
                     add_idx.append(idx)
-            if len(add_idx) > 0:
+            if len(add_idx) > 0:  # 判断是否有缺席cid（每次仅考虑t-1轮）
                 add_grads = self.last_g_locals[add_idx, :]
                 self.same_user_flag = False
             else:
